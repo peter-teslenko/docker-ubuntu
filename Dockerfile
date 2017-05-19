@@ -14,8 +14,9 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales \
  && rm -rf /var/lib/apt/lists/*
 
-# ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime 
-# && dpkg-reconfigure -f noninteractive tzdata
+# Set timezone
+RUN ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
+ && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure -f noninteractive tzdata
 
 # Configure environment
 ENV LC_ALL=en_US.UTF-8
